@@ -24,6 +24,7 @@ class CreateEvent extends Component {
 				}]
 			}
 		};
+		this.users = [];
 	}
 
 	componentDidMount () {
@@ -118,6 +119,21 @@ class CreateEvent extends Component {
 		});
 		registeredEvents[index] = this.state.event;
 		localStorage.setItem('events', JSON.stringify(registeredEvents));
+		if (this.state.event.participants.length) {
+			let users = JSON.parse(localStorage.getItem('users'));
+			this.state.event.participants.forEach(participant => {
+				let participantObj = users.find(user => {
+					return user.username === participant;
+				});
+				if (participantObj) {
+					if(!participantObj.notifications) {
+						participantObj.notifications = [];
+					}
+					participantObj.notifications.push(this.state.event.eventname + ' is updated at '+ new Date().getHours() + ' : ' + new Date().getMinutes())
+				}
+			});
+			localStorage.setItem('users', JSON.stringify(users));
+		}
 		this.goBack();
 	};
 

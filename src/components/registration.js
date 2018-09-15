@@ -73,6 +73,7 @@ class Registration extends Component {
 			if (question.isMandatory && (question.value === '' || question.value === undefined)) {
 				return true;
 			}
+			return false;
 		});
 		if (isAnyUnansweredMandatoryQuestions) {
 			this.setState({

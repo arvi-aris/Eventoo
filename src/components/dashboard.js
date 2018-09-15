@@ -10,7 +10,10 @@ class Dashboard extends Component {
 			events: [],
 			redirect: '',
 			myEvents: [],
-			otherEvents: true
+			otherEvents: true,
+			user: {
+				notifications: []
+			}
 		};
 	}
 
@@ -38,9 +41,26 @@ class Dashboard extends Component {
 			}
 			return true;
 		});
+		let users = localStorage.getItem('users');
+		users = JSON.parse(users);
+		if (!users) {
+			users = [];
+			users.push({
+				username: 'admin',
+				password: 'admin'
+			});
+			localStorage.setItem('users', JSON.stringify(users));
+		}
+		let user = users.find(user => {
+			return user.username === this.props.match.params.username;
+		})
+		if (!user.notifications) {
+			user.notifications = [];
+		}
 		this.setState({
 			events: otherEvents,
-			myEvents: myEvents
+			myEvents: myEvents,
+			user: user
 		});
 	}
 
@@ -77,7 +97,9 @@ class Dashboard extends Component {
 	};
 
 	viewNotification = () => {
-
+		this.setState({
+			redirect: this.props.match.params.username+'/notifications'
+		});
 	};
 
 	edit = (code) => {
@@ -100,7 +122,7 @@ class Dashboard extends Component {
 		return(
 		<div>
 			<div className="tool-box">
-				<button type="button" onClick={this.viewNotification}> Notifications </button>
+				<button type="button" onClick={this.viewNotification}> Notifications ({this.state.user.notifications.length}) </button>
 				<button type="button" onClick={this.createNewEvent.bind(this)}> Create new event </button>
 				{this.state.otherEvents && <button type="button" onClick={this.viewMyEvents.bind(this)}> View my events </button>}
 				{!this.state.otherEvents && <button type="button" onClick={this.viewOtherEvents.bind(this)}> View other events </button>}
@@ -116,6 +138,9 @@ class Dashboard extends Component {
 								<div className="event-list">
 								<div> {event.eventname} </div>
 								<div> {event.description} </div>
+								<div> {event.fees} INR</div>
+								<div> {event.location} </div>
+								<div> {event.duration} </div>
 								{event.participants.indexOf(this.props.match.params.username) === -1 && <button type="button" onClick={this.register.bind(this, event.code)}> Register </button>}
 								{event.participants.indexOf(this.props.match.params.username) > -1 && <button disabled type="button"> Registered </button>}
 								</div>
@@ -126,11 +151,15 @@ class Dashboard extends Component {
 								<div className="event-list">
 								<div> {event.eventname} </div>
 								<div> {event.description} </div>
+								<div> {event.fees} INR </div>
+								<div> {event.location} </div>
+								<div> {event.duration} </div>
 								<button type="button" onClick={this.edit.bind(this, event.code)}> Edit </button></div>
 							</tr>)
 					})}
 				</table>
 				{!this.state.events.length && this.state.otherEvents && <div> Sorry, No events to participate </div>}
+			 	{!this.state.myEvents.length && !this.state.otherEvents && <div> Sorry, No events found. Please create one. </div>}
 			 </div>
 		 </div>
 		);
