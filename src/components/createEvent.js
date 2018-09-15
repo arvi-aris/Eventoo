@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 class CreateEvent extends Component {
@@ -79,9 +80,23 @@ class CreateEvent extends Component {
 		registeredEvents.push(event);
 		localStorage.setItem('events', JSON.stringify(registeredEvents));
 		this.setState({
-			events: registeredEvents
+			events: registeredEvents,
+			event: {
+					eventname: '',
+					description: '',
+					duration: '',
+					location: '',
+					fees: '',
+					tags: '',
+					maxParticipants: '',
+					detailsToCollect: [{
+						question: '',
+						type: '',
+						isMandatory: false
+					}]
+				}
 		});
-		this.goBack();
+		NotificationManager.success('Your event has been created. Go back to dashboard and click \'My events\' to check', 'Success');
 	};
 
 	goBack = () => {
@@ -134,7 +149,7 @@ class CreateEvent extends Component {
 			});
 			localStorage.setItem('users', JSON.stringify(users));
 		}
-		this.goBack();
+		NotificationManager.success('Your event has been edited', 'Success');
 	};
 
 	render() {
@@ -196,6 +211,7 @@ class CreateEvent extends Component {
 					<td> <button type="button" onClick={this.goBack}> Go back to dashboard </button> </td>
 				</tr>
 			</table>
+			<NotificationContainer/>
 		 </div>
 		);
 	}

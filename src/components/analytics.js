@@ -15,12 +15,14 @@ class Analytics extends Component {
 	}
 
 	componentDidMount () {
+		//Check whether the user is logged in.
 		let loggedInUser = localStorage.getItem('loggedInUser');
 		if (loggedInUser !== this.props.match.params.username) {
 			this.setState({
 				redirect: '/login'
 			});
 		}
+		// Get the list of events created by loggedinuser
 		let events = localStorage.getItem('events');
 		events = JSON.parse(events);
 		if (!events || !events.length) {
@@ -32,6 +34,7 @@ class Analytics extends Component {
 			}
 			return true;
 		});
+		// Registered event is a object with event, user and the colleced details information
 		let registeredEvents = JSON.parse(localStorage.getItem('registeredEvents'));
 		myEvents.forEach(event => {
 				let myEventInfo = registeredEvents[event.code];
@@ -59,11 +62,11 @@ class Analytics extends Component {
 			<div className="login dashboard-box analytics-box">
 				<div className="header"> Event analytics </div>
 			<table>
-			<thead>
+			{this.state.myEvents.length ? <thead>
 				<td> Event name </td>
 				<td> Participants count </td>
 				<td> Collected details </td>
-			</thead>
+			</thead> : ''}
 				{this.state.myEvents.map(event => {
 					return(<tr>
 					<td> {event.eventname} </td>

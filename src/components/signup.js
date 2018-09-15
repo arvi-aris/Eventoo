@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 class Signup extends Component {
@@ -58,6 +59,8 @@ class Signup extends Component {
 			this.setState({
 				users: curresntUserList
 			});
+			NotificationManager.success('New user account has been created. Please login now.', 'Success');
+			//this.navigateToLogin();
 		} else {
 			this.setState({
 				errorMessage: 'Passwords do not match. Please check'
@@ -105,6 +108,7 @@ class Signup extends Component {
 					<td><button type="button" onClick={this.navigateToLogin}> Log me In </button></td>
 				</tr>
 			</table>
+			<NotificationContainer/>
 		 </div>
 		);
 	}
