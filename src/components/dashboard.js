@@ -102,6 +102,12 @@ class Dashboard extends Component {
 		});
 	};
 
+	viewAnalytics = () => {
+		this.setState({
+			redirect: this.props.match.params.username+'/analytics'
+		});
+	};
+
 	edit = (code) => {
 		this.setState({
 			redirect: this.props.match.params.username+'/'+code+'/editEvent'
