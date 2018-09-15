@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-image: url('bg.jpg');
+}
+
+.login {
+	position: absolute;
+    top: 30%;
+    background-color: white;
+    padding: 50px;
+    left: 30%;
+}
+
+input {
+	border-radius: 7px;
+    padding: 5px;
+    margin: 5px;
+    border:	1px solid black;
+}
+
+button {
+	height: 31px;
+    margin-top: 10px;
+    background-color: black;
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
+
+.error-message {
+	color: red;
+	font-size: 13px;
+}
+
+.tool-box {
+	float: right;
+}
+
+.event-box {
+	top: 10%;
+}
+
+.dashboard-box {
+    width: 550px;
+    height: 550px;
+    overflow: scroll;
+    top: 0%;
+    left: 10%
+}
+
+.event-list {
+	border-bottom: 1px solid black;
+}
+
+.event-list button {
+	border: 0;
+	background-color: white;
+	color: blue;
+}
+
+.table-header {
+	margin-bottom: 15px;
+}
