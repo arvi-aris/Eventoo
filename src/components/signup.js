@@ -59,7 +59,7 @@ class Signup extends Component {
 			this.setState({
 				users: curresntUserList
 			});
-			NotificationManager.success('New user account has been created. Please login now.', 'Success');
+			NotificationManager.success('New user account has been created. Please login now.', 'Success', 5000);
 			//this.navigateToLogin();
 		} else {
 			this.setState({

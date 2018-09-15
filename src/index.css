@@ -13,7 +13,7 @@ body {
     left: 30%;
 }
 
-input {
+input, select {
 	border-radius: 7px;
     padding: 5px;
     margin: 5px;

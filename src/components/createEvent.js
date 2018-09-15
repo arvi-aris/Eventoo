@@ -96,7 +96,7 @@ class CreateEvent extends Component {
 					}]
 				}
 		});
-		NotificationManager.success('Your event has been created. Go back to dashboard and click \'My events\' to check', 'Success');
+		NotificationManager.success('Your event has been created. Go back to dashboard and click \'My events\' to check', 'Success', 5000);
 	};
 
 	goBack = () => {
@@ -149,7 +149,7 @@ class CreateEvent extends Component {
 			});
 			localStorage.setItem('users', JSON.stringify(users));
 		}
-		NotificationManager.success('Your event has been edited', 'Success');
+		NotificationManager.success('Your event has been edited', 'Success', 5000);
 	};
 
 	render() {
@@ -201,7 +201,11 @@ class CreateEvent extends Component {
 				{this.state.event.detailsToCollect.map((details, index) => {
 					return(<tr>
 								<td> <input type="text" name="question" className="questionName" value={details.question} onChange={this.handleDetails.bind(this, index)}/> </td>
-								<td> <input type="text" name="type" className="questionType" value={details.type} onChange={this.handleDetails.bind(this, index)}/> </td>
+								<td> <select name="type" value={details.type} onChange={this.handleDetails.bind(this, index)}>
+						            	<option value="text">Text</option>
+						            	<option value="textarea">Text area</option>
+						             </select>
+						         </td>
 								<td> <input type="checkbox" name="isMandatory" className="isMandatory" checked={details.isMandatory} onChange={this.handleDetails.bind(this, index)}/> </td>
 							</tr>)
 				})}
