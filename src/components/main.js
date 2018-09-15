@@ -4,6 +4,7 @@ import Login from './login.js';
 import SignUp from './signup.js';
 import Dashboard from './dashboard.js';
 import CreateEvent from './createEvent.js';
+import Registration from './registration.js';
 
 class Main extends Component {
 	constructor(props) {
@@ -22,6 +23,7 @@ class Main extends Component {
 			      <Route exact path='/:username/dashboard' component={Dashboard}/>
 			      <Route exact path='/:username/createEvent' component={CreateEvent}/>
 			      <Route exact path='/:username/:eventCode/editEvent' component={CreateEvent}/>
+			      <Route exact path='/:username/:eventCode/register' component={Registration}/>
 			      <Route path="*" component={Login} />
 	    		</Switch>
 		  	</main>

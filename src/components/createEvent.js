@@ -92,7 +92,7 @@ class CreateEvent extends Component {
 	handleDetails = (index, event) => {
 		let challenge = this.state.event;
 		let detailsToCollect = challenge.detailsToCollect;
-		let value = event.target.type === 'checkbox' ? event.target.checked : event.target.type;
+		let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 		detailsToCollect[index][event.target.name] = value;
 		this.setState({
 			event: challenge

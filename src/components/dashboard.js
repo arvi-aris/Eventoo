@@ -58,8 +58,10 @@ class Dashboard extends Component {
 		});
 	};
 
-	register = () => {
-
+	register = (code) => {
+		this.setState({
+			redirect: this.props.match.params.username+'/'+code+'/register'
+		});
 	};
 
 	viewMyEvents = () => {
@@ -114,7 +116,9 @@ class Dashboard extends Component {
 								<div className="event-list">
 								<div> {event.eventname} </div>
 								<div> {event.description} </div>
-								<button type="button" onClick={this.register.bind(this, index)}> Register </button></div>
+								{event.participants.indexOf(this.props.match.params.username) === -1 && <button type="button" onClick={this.register.bind(this, event.code)}> Register </button>}
+								{event.participants.indexOf(this.props.match.params.username) > -1 && <button disabled type="button"> Registered </button>}
+								</div>
 							</tr>)
 					})}
 					{!this.state.otherEvents && this.state.myEvents.map((event, index) => {
