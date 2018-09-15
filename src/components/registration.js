@@ -31,7 +31,7 @@ class Registration extends Component {
 		}
 		let registeredEvents = localStorage.getItem('registeredEvents');
 		registeredEvents = JSON.parse(registeredEvents);
-		if (!registeredEvents || !registeredEvents.length) {
+		if (!registeredEvents) {
 			registeredEvents = {};
 		}
 		if (this.props.match.params.eventCode) {

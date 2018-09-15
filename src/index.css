@@ -66,3 +66,13 @@ button:disabled {
 .table-header {
 	margin-bottom: 15px;
 }
+
+.analytics-box table,.analytics-box td,.analytics-box tr {
+    border: 1px solid black;
+    padding: 8px;
+    border-collapse: collapse;
+}
+
+.header {
+    margin-bottom: 10px;
+}

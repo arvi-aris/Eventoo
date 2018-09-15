@@ -56,13 +56,13 @@ class Analytics extends Component {
     	}
 		return(
 		<div>
-			<div className="login dashboard-box">
-				Event analytics
+			<div className="login dashboard-box analytics-box">
+				<div className="header"> Event analytics </div>
 			<table>
 			<thead>
 				<td> Event name </td>
 				<td> Participants count </td>
-				<td> Collected details from each user </td>
+				<td> Collected details </td>
 			</thead>
 				{this.state.myEvents.map(event => {
 					return(<tr>
@@ -71,20 +71,18 @@ class Analytics extends Component {
 					<td> { event.participants.map(user => {
 						let userRegistrationInfo = event.info[user];
 						return(
-							<tr>
+							<tr className="user-entered-details">
 								<td> {user} </td>
-								<td> {userRegistrationInfo.map(info => {
+								{userRegistrationInfo.map(info => {
 									return(<td> {info.question + " - " + info.value}</td>)
-								})} </td>
+								})}
 							</tr>
 						)
 					})} </td>
 				</tr>)})}
-				<tr>
-					<td> <button type="button" onClick={this.navigateToDashboard}> Go back to dashboard </button> </td>
-				</tr>
 			</table>
 			{!this.state.myEvents.length && <div> Sorry, No events found. </div>}
+			<button type="button" onClick={this.navigateToDashboard}> Go back to dashboard </button> 
 			</div>
 		 </div>
 		);
